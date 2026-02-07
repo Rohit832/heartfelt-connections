@@ -1,0 +1,303 @@
+/* Navbar Container */
+.navbar {
+    background: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
+}
+
+/* Logo Section */
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.logo-container {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo-container img {
+    height: 36px;
+}
+
+/* Desktop Menu Links */
+.desktop-menu {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #333;
+    margin-right: auto;
+    /* Push actions to the right */
+    padding-left: 2rem;
+    /* Optional: Add some spacing from logo */
+}
+
+.nav-link {
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.nav-link:hover {
+    color: #0d47a1;
+}
+
+.nav-link.active {
+    color: #0d47a1;
+}
+
+/* Right Actions Section */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Location Selector */
+.location-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    background: #f8f9fa;
+    border-radius: 20px;
+    border: 1px solid #e0e0e0;
+    cursor: pointer;
+}
+
+.location-text {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.location-icon {
+    font-size: 1rem;
+}
+
+.location-arrow {
+    font-size: 0.7rem;
+    color: #999;
+}
+
+/* Divider */
+.nav-divider {
+    height: 20px;
+    width: 1px;
+    background: #e0e0e0;
+}
+
+/* User & Cart Links */
+.nav-icon-link {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.9rem;
+    color: #0d47a1;
+    font-weight: 600;
+}
+
+.cart-icon-wrapper {
+    position: relative;
+    cursor: pointer;
+}
+
+.cart-icon {
+    font-size: 1.4rem;
+    color: #333;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #d32f2f;
+    color: white;
+    font-size: 0.65rem;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #333;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN (Stack Layout)
+   ========================================= */
+
+/* Tablet (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .navbar-container {
+        padding: 0.8rem 1rem;
+    }
+
+
+
+    /* Hide links by default on tablet/mobile if we want hamburger there too, 
+       or keep them visible if space permits. The user asked for "mobile device", 
+       usually < 768px. Let's keep tablet as proper stack or maybe switch to hamburger early?
+       User said "top navbar make responsive and when in mobile device make menu inside all data".
+       Let's assume hamburger for tablet too if it gets crowded. 
+       For now, let's target 768px for the hamburger switch as commonly done. 
+    */
+
+    .desktop-menu {
+        gap: 1rem;
+    }
+}
+
+/* Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+    .navbar-container {
+        /* Keep everything in one row if possible: Logo | Actions | Hamburger */
+        /* OR Stack: Top Row (Logo + Hamburger) | Bottom (Search/Actions) ?? */
+        /* User said "top navbar is not inside make reisze it proper view". 
+           Likely means Logo header should stay, Menu links go inside hamburger. */
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .mobile-menu-toggle {
+        display: block;
+        order: 3;
+        /* Rightmost */
+    }
+
+    .logo-section {
+        width: auto;
+        justify-content: flex-start;
+        order: 1;
+    }
+
+    .nav-actions {
+        order: 2;
+        gap: 1rem;
+    }
+
+    /* Initial hidden state for menu links */
+    .desktop-menu {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        background: white;
+        padding: 1rem 0;
+        border-top: 1px solid #eee;
+        order: 4;
+        /* Below everything */
+        gap: 0;
+    }
+
+    .desktop-menu.active {
+        display: flex;
+        animation: slideDown 0.3s ease;
+    }
+
+    .nav-link {
+        padding: 0.8rem 1rem;
+        border-bottom: 1px solid #f9f9f9;
+        width: 100%;
+        text-align: left;
+    }
+
+    .location-selector {
+        /* Hide text on small mobile if needed */
+        padding: 0.3rem 0.6rem;
+    }
+
+    .location-text {
+        display: none;
+        /* Icon only to save space */
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+   MOBILE MENU ITEMS (Location, Login, Cart)
+   ========================================= */
+
+/* Hide top row actions on mobile (except toggle) */
+@media (max-width: 768px) {
+
+    .nav-actions .location-selector,
+    .nav-actions .nav-divider,
+    .nav-actions .nav-icon-link,
+    .nav-actions .cart-icon-wrapper {
+        display: none;
+    }
+
+    /* Keep toggle visible */
+    .nav-actions .mobile-menu-toggle {
+        display: block;
+    }
+}
+
+/* Show these items inside the menu when open */
+.desktop-menu .nav-item-mobile {
+    display: none;
+    /* Hidden on desktop */
+}
+
+@media (max-width: 768px) {
+    .desktop-menu .nav-item-mobile {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 1rem;
+        border-bottom: 1px solid #f0f0f0;
+        width: 100%;
+        color: #333;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 0.95rem;
+    }
+
+    .desktop-menu .nav-item-mobile:hover {
+        background: #f9f9f9;
+        color: #0d47a1;
+    }
+
+    .menu-divider {
+        height: 1px;
+        background: #f0f0f0;
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+}

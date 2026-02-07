@@ -1,0 +1,29 @@
+.home-collection-wrapper {
+    padding: 4rem 0;
+}
+
+.home-collection-grid {
+    padding: 4rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .home-collection-grid {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    /* Stack the stats (60 mins, Zero Fee) on mobile */
+    .collection-stats {
+        justify-content: center;
+    }
+}

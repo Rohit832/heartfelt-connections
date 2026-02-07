@@ -1,0 +1,230 @@
+/* Hero Section Container */
+.hero-section {
+    position: relative;
+    background: #fcfcfc;
+    padding: 2rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-container {
+    display: grid;
+    /* Adjust grid columns for better responsiveness */
+    grid-template-columns: 2fr 1fr;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Banner Carousel Wrapper */
+.banner-wrapper {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    /* Ensure aspect ratio is consistent */
+    aspect-ratio: 16/9;
+}
+
+/* Booking Widget Container */
+.booking-widget {
+    background: #f0f4f8;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    /* Ensure widget takes proper height */
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Widget Header */
+.widget-header {
+    color: #1565c0;
+    text-align: center;
+    margin-bottom: 1.2rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+/* Search Bar */
+.widget-search {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.widget-search input {
+    width: 100%;
+    padding: 0.9rem;
+    padding-right: 3rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    outline: none;
+    background: white;
+}
+
+.widget-search-btn {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    height: calc(100% - 10px);
+    width: 36px;
+    background: #fdd835;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #333;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.widget-divider {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Widget Buttons */
+.widget-btn {
+    width: 100%;
+    background: #1e56a0;
+    color: white;
+    border: none;
+    padding: 0.9rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+}
+
+.widget-btn:hover {
+    transform: translateY(-2px);
+    background: #154c8c;
+}
+
+.widget-btn-arrow {
+    background: #fdd835;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    font-size: 0.8rem;
+}
+
+/* Quick Actions */
+.quick-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+.action-item {
+    background: #1565c0;
+    border-radius: 6px;
+    padding: 0.8rem 0.5rem;
+    flex: 1;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.2s;
+}
+
+.action-item:hover {
+    background: #0d47a1;
+}
+
+.action-icon {
+    font-size: 1.2rem;
+}
+
+.action-text {
+    font-size: 0.7rem;
+    line-height: 1.2;
+}
+
+
+/* =========================================
+   RESPONSIVE DESIGN (Media Queries)
+   ========================================= */
+
+/* Tablet (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .hero-container {
+        grid-template-columns: 1fr;
+        /* Stack on tablets as well for better readability */
+        gap: 1.5rem;
+        max-width: 768px;
+        /* Limit width for cleaner look */
+    }
+
+    .banner-wrapper {
+        aspect-ratio: 16/9;
+    }
+}
+
+/* Mobile Devices (max-width: 768px) */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 1rem 0;
+    }
+
+    .hero-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+
+    .banner-wrapper {
+        aspect-ratio: 16/9;
+    }
+
+    .booking-widget {
+        padding: 1.2rem;
+    }
+}
+
+/* Small Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+    .banner-wrapper {
+        aspect-ratio: 4/3;
+        /* Taller banner on small screens */
+    }
+
+    .widget-btn {
+        padding: 0.8rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    .quick-actions {
+        gap: 0.5rem;
+    }
+
+    .action-text {
+        font-size: 0.65rem;
+    }
+}

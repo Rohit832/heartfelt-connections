@@ -1,0 +1,69 @@
+/* Utility Bar Container */
+.utility-bar {
+    background: #0056b3;
+    padding: 0.5rem 0;
+    color: white;
+    font-size: 0.85rem;
+}
+
+.utility-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1.5rem;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.utility-link {
+    cursor: pointer;
+    opacity: 0.9;
+    white-space: nowrap;
+}
+
+.utility-divider {
+    height: 12px;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.utility-contact {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .utility-container {
+        justify-content: center;
+        gap: 0.8rem;
+        font-size: 0.75rem;
+        flex-wrap: wrap;
+        /* Allow wrapping if needed */
+    }
+
+    .utility-contact {
+        gap: 0.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .utility-bar {
+        padding: 0.3rem 0;
+    }
+
+    .utility-container {
+        gap: 0.5rem;
+    }
+
+    /* Hide non-essential links on very small screens if crowded */
+    .utility-link.optional {
+        display: none;
+    }
+
+    .utility-divider.optional {
+        display: none;
+    }
+}
