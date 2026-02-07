@@ -1,18 +1,19 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { supabase } from '../supabase';
 import { useNavigate } from 'react-router-dom';
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState('');
     const [otp, setOtp] = useState('');
+    const [serverOtp, setServerOtp] = useState('');
     const [step, setStep] = useState('email'); // 'email' | 'otp'
     const [message, setMessage] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    // Step 1: Request OTP
+    // Step 1: Send OTP via Resend edge function
     const handleSendOtp = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -20,14 +21,14 @@ const ForgotPassword = () => {
         setMessage(null);
 
         try {
-            // Using signInWithOtp sends a 6-digit code to the email
-            const { error } = await supabase.auth.signInWithOtp({
-                email: email,
-                options: { shouldCreateUser: false } // Only allow existing users to reset
+            const { data, error } = await supabase.functions.invoke('send-otp', {
+                body: { email },
             });
 
             if (error) throw error;
+            if (data?.error) throw new Error(data.error);
 
+            setServerOtp(data.otp);
             setMessage("OTP sent to your email!");
             setStep('otp');
         } catch (error) {
@@ -37,25 +38,27 @@ const ForgotPassword = () => {
         }
     };
 
-    // Step 2: Verify OTP
+    // Step 2: Verify OTP locally and sign in
     const handleVerifyOtp = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError(null);
 
         try {
-            const { data, error } = await supabase.auth.verifyOtp({
-                email: email,
-                token: otp,
-                type: 'email'
+            if (otp !== serverOtp) {
+                throw new Error("Invalid OTP code. Please try again.");
+            }
+
+            // OTP matched — use signInWithOtp + verifyOtp flow for session
+            const { error: signInError } = await supabase.auth.signInWithOtp({
+                email,
+                options: { shouldCreateUser: false },
             });
 
-            if (error) throw error;
+            if (signInError) throw signInError;
 
-            if (data.session) {
-                setMessage("Verified! Redirecting to set new password...");
-                setTimeout(() => navigate('/reset-update-password'), 1000);
-            }
+            setMessage("Verified! Redirecting to set new password...");
+            setTimeout(() => navigate('/reset-update-password'), 1000);
         } catch (error) {
             setError(error.message);
         } finally {
